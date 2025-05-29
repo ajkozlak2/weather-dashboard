@@ -58,7 +58,7 @@ class WeatherService {
    }
   //  Create buildWeatherQuery method
   private buildWeatherQuery(coordinates: Coordinates): string {
-    return `${this.baseURL}/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${this.apiKey}`;
+    return `${this.baseURL}/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${this.apiKey}`;
   }
   // : Create fetchAndDestructureLocationData method
    private async fetchAndDestructureLocationData() {
@@ -109,8 +109,8 @@ class WeatherService {
     try {
       const coordinates = await this.fetchAndDestructureLocationData();
       const weatherData = await this.fetchWeatherData(coordinates);
-      const currentWeather = this.parseCurrentWeather(weatherData);
-      const forecastArray = this.buildForecastArray(currentWeather, weatherData.weather);
+      const currentWeather = this.parseCurrentWeather(weatherData.list[0]);
+      const forecastArray = this.buildForecastArray(currentWeather, weatherData.list);
       return forecastArray;
     } catch (error) {
       console.error('Error fetching weather data:', error);

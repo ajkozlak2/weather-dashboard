@@ -17,7 +17,7 @@ class HistoryService {
   private filePath: string;
   private cities: City[];
   constructor() {
-    this.filePath = path.join(process.cwd(), 'server', 'data', 'searchHistory.json');
+    this.filePath = path.join(process.cwd(), 'db', 'db.json');
     this.cities = [];
   }
   // : Define a read method that reads from the searchHistory.json file
